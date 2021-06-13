@@ -50,14 +50,21 @@ defmodule Pfu.Timeline do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_post(attrs \\ %{}) do
-    {:ok, post} = %Post{} |> Post.changeset(attrs) |> Repo.insert()
-
-    user = Repo.get(User, post.user_id)
+  def create_post(%Post{} = post, attrs, after_save \\ &{:ok, &1}) do
+    post1 = post |> Post.changeset(attrs) |> Repo.insert() |> after_save(after_save)
+    IO.inspect(post1)
+    IO.inspect("ACIMA É O POST")
+    user = Repo.get(User, post1.user_id)
     post = Map.merge(post, %{user: user})
 
-    {:ok, post} |> broadcast(:post_created) #Programado
+    |> broadcast(:post_created) #Programado
   end
+
+  defp after_save({:ok, post}, func) do
+    {:ok, _post} = func.(post)
+  end
+  defp after_save(error, _func), do: error
+
 
   @doc """
   Updates a post.
@@ -71,8 +78,8 @@ defmodule Pfu.Timeline do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_post(%Post{} = post, attrs) do
-    {:ok, post} = post |> Post.changeset(attrs) |> Repo.update()
+  def update_post(%Post{} = post, attrs, after_save \\ &{:ok, &1}) do
+    {:ok, post} = post |> Post.changeset(attrs) |> Repo.update() |> after_save(after_save)
 
     user = Repo.get(User, post.user_id)
     post = Map.merge(post, %{user: user})

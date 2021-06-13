@@ -6,6 +6,8 @@ defmodule Pfu.Timeline.Post do
     field :body, :string
     field :likes_count, :integer, default: 0
     field :reposts_count, :integer, default: 0
+    # filed :username, :string, deafult: "user"
+    field :photo_urls, {:array, :string}, default: []
     belongs_to :user, Pfu.User
 
     timestamps()

@@ -58,7 +58,7 @@ config :pfu, PfuWeb.Endpoint,
 config :pfu, PfuWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/static/[^uploads].*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/pfu_web/(live|views)/.*(ex)$",
       ~r"lib/pfu_web/templates/.*(eex)$"
