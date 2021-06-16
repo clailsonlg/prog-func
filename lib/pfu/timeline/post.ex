@@ -9,6 +9,7 @@ defmodule Pfu.Timeline.Post do
     # filed :username, :string, deafult: "user"
     field :photo_urls, {:array, :string}, default: []
     belongs_to :user, Pfu.User
+    field :url_video, :string
 
     timestamps()
   end
