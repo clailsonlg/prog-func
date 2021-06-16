@@ -17,5 +17,13 @@
         <%= password_input f, :password, placeholder: "Password", class: "form-control" %>
         <%= error_tag f, :password %>
     </div>
+    <div>
+
+        <label>
+            tipo: <%= select f, :tipo, Ecto.Enum.values(Pfu.User, :tipo) %>
+            <%= error_tag f, :tipo %>
+        </label>
+
+    </div>
     <%= submit "RECORD", class: "btn btn-primary" %>
 <% end %>

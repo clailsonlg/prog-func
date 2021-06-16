@@ -8,6 +8,7 @@ defmodule Pfu.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     has_many :posts, Pfu.Timeline.Post
+    field :tipo, Ecto.Enum, values: [:Professor, :AlunoMestrado, :AlunoGraduacao]
 
     timestamps()
   end
@@ -15,7 +16,7 @@ defmodule Pfu.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :username, :password, :password_hash])
+    |> cast(attrs, [:name, :username, :password, :password_hash, :tipo])
     |> validate_required([:name, :username, :password])
     |> validate_length(:username, min: 3, max: 16)
     |> validate_length(:password, min: 3, max: 32)
