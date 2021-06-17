@@ -6,13 +6,11 @@
   phx_change: "validate",
   phx_submit: "save" %>
 
-  <%# <%= text_input f, :username %>
   <%= textarea f, :body %>
   <%= error_tag f, :body %>
 
   <label>Upload Video</label>
-  <%= textarea f, :url_video %>
-  <%= error_tag f, :url_video %>
+  <%= text_input f, :url_video %>
 
   <%=for {_ref, msg} <- @uploads.photo.errors do %>
     <p class="alert alert-danger"><%= Phoenix.Naming.humanize(msg) %></p>
