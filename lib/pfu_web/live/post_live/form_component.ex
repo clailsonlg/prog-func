@@ -38,6 +38,7 @@ defmodule PfuWeb.PostLive.FormComponent do
   end
 
   defp save_post(socket, :edit, post_params) do
+    IO.inspect(post_params)
     post = put_photo_urls(socket, socket.assigns.post)
     case Timeline.update_post(post, post_params, &consume_photos(socket, &1)) do
       {:ok, _post} ->
